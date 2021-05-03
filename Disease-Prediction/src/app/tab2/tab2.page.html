@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 2</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-item-group>
+    <ion-item-divider color="light">CSV</ion-item-divider>
+    <hr>
+    <ion-item >
+      <table border="1" class="data-table">
+        <tr>
+          <td *ngFor="let header of headerRow" text-center><b>{{ header }}</b></td>
+        </tr>
+        <tr *ngFor="let row of csvData; let i = index">
+          <td *ngFor="let data of row; let j = index;" class="data-col ">
+            <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
+          </td>
+        </tr>
+      </table>
+      
+    </ion-item>
+  </ion-item-group>
+
+  <app-explore-container name="Tab 2 page"></app-explore-container>
+</ion-content>

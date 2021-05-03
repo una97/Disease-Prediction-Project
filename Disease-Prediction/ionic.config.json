@@ -1,0 +1,7 @@
+{
+  "name": "disease-prediction",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
