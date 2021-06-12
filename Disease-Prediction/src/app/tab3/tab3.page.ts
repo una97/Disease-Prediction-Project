@@ -88,15 +88,19 @@ export class Tab3Page {
   }
 
   private createHashTable() {
-    
-    this.http.get(this.testPath, {
-      responseType: 'text'
-    }).subscribe(
-      data => {
-        this.extractData_test(data)
-      },
-      err => console.log('something went wrong: ', err)
-    );
+    for (let i = 1; i <= 3; i++) {
+      let path = "./assets/data/test_set" + i + ".csv"
+      this.http.get(path, {
+        responseType: 'text'
+      }).subscribe(
+        data => {
+          this.extractData_test(data)
+        },
+        err => console.log('something went wrong: ', err)
+      );
+      this.countGenoType();
+    }
+
   }
   private saveExistSNP() {
 
@@ -123,23 +127,24 @@ export class Tab3Page {
 
 
 
-        this.duplicateSNPs.push(data[0])
+        // this.duplicateSNPs.push(data[0])
       }
 
     }
-    console.log(this.duplicateSNPs);
+    // console.log(this.duplicateSNPs);
   }
   //csv to array로 만드는 과정 
   private extractData_test(res) {
     let csvData = res || ''; // 초기화
     // let resultArr
+    this.snpTestHash1 = new Map(); //초기화
     this.papa.parse(csvData, {
       complete: parsedData => {
 
         this.resultArr = parsedData.data.slice(1) //["1", "rs117589110", "0"] 배열들로 파싱됨
 
         this.resultArr.forEach(element => {
-          this.snpTestHash1.set(element[1], element[2]) //해시테이블에 저장 
+          this.snpTestHash1.set(element[1], element[2]) //해시테이블에 저장 -> snp와 genotype 
         });
         this.saveExistSNP();
         // console.log(this.snpTestHash1);

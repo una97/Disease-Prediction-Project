@@ -9,44 +9,47 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large"> 타 겟 질 병 예 측</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-grid class="back-grid" style="
+background-color: cadetblue;
+border-radius: 1em;
+margin: 10px;
+">
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>Geno Type</ion-col>
+        <ion-col>Count</ion-col>
+        <ion-col>P.Val Max</ion-col>
+        <ion-col>P.Val Min</ion-col>
 
+      </ion-row>
+      <ion-row>
+        <ion-col>0</ion-col>
+        <ion-col>{{geno_cnt0}}</ion-col>
+        <ion-col>{{pvalMax0}}</ion-col>
+        <ion-col>{{pvalMin0}}</ion-col>
 
-  <ion-grid class="ion-margin">
-    <ion-row>
-      <ion-col>Geno Type</ion-col>
-      <ion-col>Count</ion-col>
-      <ion-col>P.Val Max</ion-col>
-      <ion-col>P.Val Min</ion-col>
-   
-    </ion-row>
-    <ion-row >
-      <ion-col>0</ion-col>
-      <ion-col>{{geno_cnt0}}</ion-col>
-      <ion-col>{{pvalMax0}}</ion-col>
-      <ion-col>{{pvalMin0}}</ion-col>
-     
-    </ion-row>
-    <ion-row >
-      <ion-col>1</ion-col>
-      <ion-col>{{geno_cnt1}}</ion-col>
-      <ion-col>{{pvalMax1}}</ion-col>
-      <ion-col>{{pvalMin1}}</ion-col>
-     
-    </ion-row>
-    <ion-row >
-      <ion-col>2</ion-col>
-      <ion-col>{{geno_cnt2}}</ion-col>
-      <ion-col>{{pvalMax2}}</ion-col>
-      <ion-col>{{pvalMin2}}</ion-col>
-    </ion-row>
+      </ion-row>
+      <ion-row>
+        <ion-col>1</ion-col>
+        <ion-col>{{geno_cnt1}}</ion-col>
+        <ion-col>{{pvalMax1}}</ion-col>
+        <ion-col>{{pvalMin1}}</ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col>2</ion-col>
+        <ion-col>{{geno_cnt2}}</ion-col>
+        <ion-col>{{pvalMax2}}</ion-col>
+        <ion-col>{{pvalMin2}}</ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-grid>
-  
-    <ion-item lines="none">
+  <!-- <ion-item lines="none">
       <ion-button color="primary" size="small" slot="end" (click)="countGenoType()" (ionChange)="change($event)">
         <ion-icon name="reload-outline"></ion-icon> Get Geno Count
       </ion-button>
-    </ion-item>
+    </ion-item> -->
 </ion-content>
