@@ -6,18 +6,31 @@ import 'rxjs/Rx';
 import { File } from '@ionic-native/file/ngx';
 import * as papa from 'papaparse'; //to parse csv file 
 
+export interface IHash {
+  [indexer: string] : any;
+}
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
 export class Tab2Page {
   public csvData: any[] = [];
   public headerRow : any; //형 지정해주면 할당할 때 에러난다. 
 
+  snpHash: IHash = {};   
+  
+
   constructor(public navCtrl: NavController, public http : HttpClient) {
     this.readCsvData();
+    this.snpHash["ss"] = "ss";
+    console.log(this.snpHash);
+    for (let i = 1; i <=3; i++) {
+      let path = "./assets/data/test_set"+i+".csv"
+      console.log(path);    
+    }
   }
   // read csv data 
   private readCsvData() {

@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
-  <!-- <ion-toolbar>
+  <ion-toolbar>
     <ion-title>
-      Tab 3
+      타겟 질병 예측
     </ion-title>
-  </ion-toolbar> -->
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -18,21 +18,29 @@
     <ion-row>
       <ion-col>Geno Type</ion-col>
       <ion-col>Count</ion-col>
-    
+      <ion-col>P.Val Max</ion-col>
+      <ion-col>P.Val Min</ion-col>
+   
     </ion-row>
     <ion-row >
       <ion-col>0</ion-col>
-      <ion-col>{{num0}}</ion-col>
+      <ion-col>{{geno_cnt0}}</ion-col>
+      <ion-col>{{pvalMax0}}</ion-col>
+      <ion-col>{{pvalMin0}}</ion-col>
      
     </ion-row>
     <ion-row >
       <ion-col>1</ion-col>
-      <ion-col>{{num1}}</ion-col>
+      <ion-col>{{geno_cnt1}}</ion-col>
+      <ion-col>{{pvalMax1}}</ion-col>
+      <ion-col>{{pvalMin1}}</ion-col>
      
     </ion-row>
     <ion-row >
       <ion-col>2</ion-col>
-      <ion-col>{{num2}}</ion-col>
+      <ion-col>{{geno_cnt2}}</ion-col>
+      <ion-col>{{pvalMax2}}</ion-col>
+      <ion-col>{{pvalMin2}}</ion-col>
     </ion-row>
   </ion-grid>
   
