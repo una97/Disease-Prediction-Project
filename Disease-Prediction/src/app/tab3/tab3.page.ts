@@ -22,9 +22,9 @@ enum File {
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  public reference: any[] = []; //레퍼런스 파싱된 데이터를 저장한 배열 
-  public resultArr: any[] = []; //테스트파일 파싱된 데이터를 저장한 배열
-  public referenceSNPs: any[] = []; //파싱된 레퍼런스에서 SNP만 모아놓은 배열
+  public refParsedArr: any[] = []; //레퍼런스 파싱된 데이터를 저장한 배열 
+  public testParsedArr: any[] = []; //테스트파일 파싱된 데이터를 저장한 배열
+  public referenceSNPs: any[] = []; //파싱된 레퍼런스에서 SNP와 .Pval만 모아놓은 배열
 
   //genotype별로 SNP개수를 세기 위한 변수 
   public geno_cnt0 = 0;
@@ -40,7 +40,7 @@ export class Tab3Page {
   public pvalMin2 = Number.MAX_SAFE_INTEGER;
 
   //테스트 파일의 SNP와 genotype를 키-값으로 저장하는 맵 
-  public snpTestHash1 = new Map();
+  public snpTestHash = new Map();
 
   /*
   constructor는 javascript엔진에서 호출
@@ -65,23 +65,16 @@ export class Tab3Page {
   private execute() {
     for (let i = 1; i <= 3; i++) {
       let path = "./assets/data/test_set" + i + ".csv"
-      this.http.get(path, {
-        responseType: 'text'
-      }).subscribe(
-        data => {
-          this.extractData(data, File.TEST)
-        },
-        err => console.log('something went wrong: ', err)
-      );
-      // this.countGenoType();
+      this.readCsvData(path,File.TEST)
     }
   }
 
   //geno 갯수와 pval 최대 최소 구하기 
   private getGenoCnt() {
     for (let data of this.referenceSNPs) {
-      if (this.snpTestHash1.has(data[0])) { //일치하는 SNP가 있다면 저장해둔다. 이 때, test파일의 geno값에 따라 cnt값이 달라진다. 
-        switch (this.snpTestHash1.get(data[0])) {
+      if (this.snpTestHash.has(data[0])) { //일치하는 SNP가 있다면 저장해둔다. 이 때, test파일의 geno값에 따라 cnt값이 달라진다. 
+        //data[0]: SNP, data[1]: P.val
+        switch (this.snpTestHash.get(data[0])) {
           case '0':
             this.geno_cnt0 += 1;
             this.pvalMax0 = Math.max(this.pvalMax0, data[1]);
@@ -103,23 +96,6 @@ export class Tab3Page {
     }
   }
 
-  //csv to array로 만드는 과정 
-  private extractData_test(res) {
-    let csvData = res || ''; // 초기화
-    // let resultArr
-    this.snpTestHash1 = new Map(); //초기화
-    this.papa.parse(csvData, {
-      complete: parsedData => {
-
-        this.resultArr = parsedData.data.slice(1) //["1", "rs117589110", "0"] 배열들로 파싱됨
-
-        this.resultArr.forEach(element => {
-          this.snpTestHash1.set(element[1], element[2]) //해시테이블에 저장 -> snp와 genotype 
-        });
-        this.getGenoCnt();
-      }
-    });
-  }
   // read csv data 
   private readCsvData(path, fileType) {
     this.http
@@ -134,41 +110,31 @@ export class Tab3Page {
       );
   }
 
-  //읽은 csv데이터를 파싱
+  //읽은 csv데이터를 arr형태로 파싱
   private extractData(res, fileType) {
     let csvData = res || '';
-    // let resultData
     this.papa.parse(csvData, {
       complete: parsedData => {
-        // parsedData.data.splice(0, 1)[0]; // ["CHR", "SNP", "geno"]  //splice() 메서드는 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
-        // resultData = parsedData.data
-        let realParsedData = parsedData.data.slice(1)
+        let realParsedData = parsedData.data.slice(1) //첫 줄의 [CHR,SNP,geno]없애고 의미있는 값만
         if (fileType == "REF") {
-          // this.reference = parsedData.data.slice(1)
-          this.reference = realParsedData
-          // console.log(resultData)
-          for (var data of this.reference) {
+          this.refParsedArr = realParsedData
+          for (var data of this.refParsedArr) {
             this.referenceSNPs.push([data[0], data[4]]); //스닙과 p.val 저장. 
           }
-          console.log(this.reference)
+          console.log(this.refParsedArr)
         }
         else if (fileType == "TEST") {
-          this.snpTestHash1 = new Map(); //초기화
-          this.resultArr = realParsedData
-          this.resultArr.forEach(element => {
-            this.snpTestHash1.set(element[1], element[2]) //해시테이블에 저장 -> snp와 genotype 
+          this.snpTestHash = new Map(); //초기화
+          this.testParsedArr = realParsedData
+          this.testParsedArr.forEach(element => {
+            this.snpTestHash.set(element[1], element[2]) //해시테이블에 저장 -> snp와 genotype 
           });
           this.getGenoCnt();
         }
       }
     })
-    // return resultData
   }
 
-  // private countGenoType() {
-  //   console.log(this.geno_cnt0, this.geno_cnt1, this.geno_cnt2)
-  // }
-  
   change(event) {
     console.log(event.detail.value)
   }
