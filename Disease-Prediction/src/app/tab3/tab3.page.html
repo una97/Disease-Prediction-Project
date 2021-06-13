@@ -12,12 +12,11 @@
       <ion-title size="large"> 타 겟 질 병 예 측</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid class="back-grid" style="
-background-color: cadetblue;
-border-radius: 1em;
-margin: 10px;
-">
-    <ion-grid class="ion-margin">
+  <ion-grid class="back-grid" >
+    <ion-grid class="ion-margin" style="
+    background-color: cadetblue;
+    border-radius: 0.4em;
+    ">
       <ion-row>
         <ion-col>Geno Type</ion-col>
         <ion-col>Count</ion-col>
@@ -47,6 +46,21 @@ margin: 10px;
       </ion-row>
     </ion-grid>
   </ion-grid>
+  <ion-grid style="background-color: white;color: black;margin: 10px;padding: 20px;border-radius: 1em;">
+    
+    <div>
+      Geno가 0인 SNP의 개수는 {{geno_cnt0}}이고, Pval의 최대와 최소는 각각 {{pvalMax0}}, {{pvalMin0}} 이다.
+    </div>
+    <br>
+    <div>
+      Geno가 1인 SNP의 개수는 {{geno_cnt1}}이고, Pval의 최대와 최소는 각각 {{pvalMax1}}, {{pvalMin1}} 이다.
+    </div>
+    <br>
+    <div>
+      Geno가 2인 SNP의 개수는 {{geno_cnt2}}이고, Pval의 최대와 최소는 각각 {{pvalMax2}}, {{pvalMin2}} 이다.
+    </div>
+  </ion-grid>
+  
   <!-- <ion-item lines="none">
       <ion-button color="primary" size="small" slot="end" (click)="countGenoType()" (ionChange)="change($event)">
         <ion-icon name="reload-outline"></ion-icon> Get Geno Count

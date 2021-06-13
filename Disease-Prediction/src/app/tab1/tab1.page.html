@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      main
+      타겟 질병 예측
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,87 +9,47 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">타겟 질병 예측</ion-title>
+      <ion-title size="large"> 타 겟 질 병 예 측</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-grid class="back-grid" style="
+background-color: cadetblue;
+border-radius: 1em;
+margin: 10px;
+">
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>Geno Type</ion-col>
+        <ion-col>Count</ion-col>
+        <ion-col>P.Val Max</ion-col>
+        <ion-col>P.Val Min</ion-col>
 
-  <ion-item-group>
-    <ion-item-divider color="light">CSV</ion-item-divider>
-    <ion-item *ngFor="let item of csvItems">
-       {{ item }}
-    </ion-item>
- </ion-item-group>
- 
-  <table border="1" class="data-table">
-    <tr>
-      <td *ngFor="let header of headerRow" text-center><b>{{ header }}</b></td>
-    </tr>
-    <tr *ngFor="let row of csvData; let i = index">
-      <td *ngFor="let data of row; let j = index;" class="data-col ">
-        <ion-input type="text" [(ngModel)]="csvData[i][j]"></ion-input>
-      </td>
-    </tr>
-  </table>
- 
+      </ion-row>
+      <ion-row>
+        <ion-col>0</ion-col>
+        <ion-col>{{geno_cnt0}}</ion-col>
+        <ion-col>{{pvalMax0}}</ion-col>
+        <ion-col>{{pvalMin0}}</ion-col>
 
-  <!-- List of Text Items -->
-  <ion-list>
-    <ion-item>
-      <ion-label>암 </ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>대장암</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>신장</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>아직</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>데이터가</ion-label>
-    </ion-item>
-  </ion-list>
+      </ion-row>
+      <ion-row>
+        <ion-col>1</ion-col>
+        <ion-col>{{geno_cnt1}}</ion-col>
+        <ion-col>{{pvalMax1}}</ion-col>
+        <ion-col>{{pvalMin1}}</ion-col>
 
-  <!-- List of Input Items -->
-  <ion-list>
-    <ion-item>
-      <ion-label>없어서</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>데이터</ion-label>
-      <ion-toggle slot="end"></ion-toggle>
-    </ion-item>
-    <ion-item>
-      <ion-label>받고</ion-label>
-      <ion-radio slot="end"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>다시 꾸밀게요</ion-label>
-      <ion-checkbox slot="start"></ion-checkbox>
-    </ion-item>
-  </ion-list>
-
-  <!-- List of Sliding Items -->
-  <ion-list>
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>Item</ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option (click)="unread(item)">Unread</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>Item</ion-label>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option (click)="unread(item)">Unread</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+      </ion-row>
+      <ion-row>
+        <ion-col>2</ion-col>
+        <ion-col>{{geno_cnt2}}</ion-col>
+        <ion-col>{{pvalMax2}}</ion-col>
+        <ion-col>{{pvalMin2}}</ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+  <!-- <ion-item lines="none">
+      <ion-button color="primary" size="small" slot="end" (click)="countGenoType()" (ionChange)="change($event)">
+        <ion-icon name="reload-outline"></ion-icon> Get Geno Count
+      </ion-button>
+    </ion-item> -->
 </ion-content>
