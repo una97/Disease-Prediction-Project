@@ -3,4 +3,4 @@
 
 
 ### 메인 소스코드
-* Disease-Prediction > src > app > tab2 & tab3
+* Disease-Prediction > src > app > tab3 > tab3.page.ts & tab3.page.html
